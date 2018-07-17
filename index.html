@@ -22,7 +22,7 @@ body, html {height: 100%}
   	<script type="text/javascript">
       humid = 0;
       temp = 0;
-    client = new Paho.MQTT.Client("iot.eclipse.org", Number(80) , "/ws", "myClientId2" + new Date().getTime());
+    client = new Paho.MQTT.Client("iot.eclipse.org", Number(443), "/wss");
     client.onConnectionLost = function (responseObject) {
       console.log("Connection Lost: "+responseObject.errorMessage);
       client.connect();
@@ -34,8 +34,8 @@ body, html {height: 100%}
     }
     // Connect the client, providing an onConnect callback
     client.connect({
-      onSuccess: onConnect
-    });
+      onSuccess: onConnect,
+                useSSL: true});
     client.onMessageArrived = function (message) {
       data = JSON.parse(message.payloadString);
       console.log("payload " + JSON.stringify(data.payload.values));
@@ -59,13 +59,13 @@ body, html {height: 100%}
     tactx-io
   </div>
   <div class="w3-display-middle">
-    <h1 class="w3-jumbo w3-animate-top">UNDER CONSTRUCTION</h1>
+    <h1 class="w3-jumbo w3-animate-top">COMING SOON</h1>
     <hr class="w3-border-grey" style="margin:auto;width:40%">
-    <p class="w3-large w3-center">Coming Soon</p>
+    <p class="w3-large w3-center">Under Construction</p>
   </div>
 
   <div class="w3-display-bottommiddle">
-    <p class=" w3-small w3-center">Have you ever wondered what the actual temperature of the Attersee is?</p>
+    <p class=" w3-small w3-center">By the way... you want to know the actual temperature of the Attersee is?</p>
     <p id="temperature" class="w3-large w3-center">--.--°C</p>
   </div>
 </div>
