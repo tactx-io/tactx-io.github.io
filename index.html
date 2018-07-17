@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>tactx-io github page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -23,8 +23,6 @@ body, html {height: 100%}
       humid = 0;
       temp = 0;
     client = new Paho.MQTT.Client("iot.eclipse.org", Number(80) , "/ws", "myClientId2" + new Date().getTime());
-    //client = new Paho.MQTT.Client("192.168.2.1", 1884,"myClientId" + new Date().getTime());
-    // set callback handlers
     client.onConnectionLost = function (responseObject) {
       console.log("Connection Lost: "+responseObject.errorMessage);
       client.connect();
@@ -39,12 +37,8 @@ body, html {height: 100%}
       onSuccess: onConnect
     });
     client.onMessageArrived = function (message) {
-      
-      
       data = JSON.parse(message.payloadString);
       console.log("payload " + JSON.stringify(data.payload.values));
-      
-      //console.log("temppayload " + JSON.parse(message.payloadString));
       displayTemperature(data.payload.values);
     }
     
@@ -56,10 +50,7 @@ body, html {height: 100%}
       //document.getElementById("item4").innerHTML = temperatures[4] + '°C';
     }
     document.addEventListener("DOMContentLoaded", function(event) {
-      console.log("DOM fully loaded and parsed");
       displayTemperature(["--.--", "--.--", "--.--", "--.--", "--.--"]);
-      document.body.style.backgroundColor = "black";
-      
     });
   </script>
 
@@ -76,10 +67,6 @@ body, html {height: 100%}
   <div class="w3-display-bottommiddle">
     <p class=" w3-small w3-center">Have you ever wondered what the actual temperature of the Attersee is?</p>
     <p id="temperature" class="w3-large w3-center">--.--°C</p>
-  </div>
-
-  <div class="w3-display-bottomleft w3-padding-large">
-    Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
   </div>
 </div>
 
