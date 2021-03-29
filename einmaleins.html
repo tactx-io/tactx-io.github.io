@@ -31,7 +31,7 @@ body {
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  padding: 10px 12px;
   text-decoration: none;
 }
 
@@ -54,6 +54,12 @@ body {
   text-align: left;
 }
 
+th, td {
+  padding-left: 15px;
+  padding-bottom: 4px;
+  padding-top: 4px;
+}
+
 
 </style>
 </head>
@@ -66,106 +72,63 @@ body {
 
 <div class="topnav">
 	<a>
-		<input type="checkbox" id="one" name="one">
+		<input type="checkbox" id="one" name="one" onClick="checkcheck()">
 		<label for="vehicle1"> 1 </label><br>
 	</a>
 	<a>
-		<input type="checkbox" id="two" name="two">
+		<input type="checkbox" id="two" name="two"  onClick="checkcheck()">
 		<label for="vehicle1"> 2</label><br>
 	</a>
 	<a>
-		<input type="checkbox" id="three" name="three">
+		<input type="checkbox" id="three" name="three" onClick="checkcheck()">
 		<label for="vehicle1"> 3</label><br>
 	</a>
 	<a>
-		<input type="checkbox" id="four" name="four">
+		<input type="checkbox" id="four" name="four" onClick="checkcheck()">
 		<label for="vehicle1"> 4 </label><br>
 	</a>
 	<a>
-		<input type="checkbox" id="five" name="five">
+		<input type="checkbox" id="five" name="five" onClick="checkcheck()">
 		<label for="vehicle1"> 5</label><br>
 	</a>
 	<a>
-		<input type="checkbox" id="six" name="six">
+		<input type="checkbox" id="six" name="six" onClick="checkcheck()">
 		<label for="vehicle1"> 6</label><br>
 	</a>
 		<a>
-		<input type="checkbox" id="seven" name="seven">
+		<input type="checkbox" id="seven" name="seven" onClick="checkcheck()">
 		<label for="vehicle1"> 7</label><br>
 	</a>
 	<a>
-		<input type="checkbox" id="eight" name="eight">
+		<input type="checkbox" id="eight" name="eight" onClick="checkcheck()">
 		<label for="vehicle1"> 8 </label><br>
 	</a>
 	<a>
-		<input type="checkbox" id="nine" name="nine">
+		<input type="checkbox" id="nine" name="nine" onClick="checkcheck()">
 		<label for="vehicle1"> 9</label><br>
 	</a>
 	<a>
-		<input type="checkbox" id="ten" name="ten">
+		<input type="checkbox" id="ten" name="ten" onClick="checkcheck()">
 		<label for="vehicle1"> 10</label><br>
 	</a>
 	<a>
-		<button onclick="myFunction()">Try it</button>
+		<button onclick="myFunction()" id="generate" disabled="true">Erzeugen</button>
 	</a>
 	
 </div>
 
 
+<div id="calcdiv">
+</div>
 
 
-
-
-
-<p id="demo"></p>
+</body>
 
 <script>
 
 var values;
 
-function addCalculation(tableID, left, right){
-    var table = tableID
-
-	var rowCount = table.rows.length;
-	var row = table.insertRow(rowCount);
-	
-	
-	let calc = left + " . " + right + " =";
-	
-     
-	var cell1 = row.insertCell(0);
-	cell1.innerHTML = calc;
-	
-	//var cell2 = row.insertCell(1);
-}
-
-function addCol(div){
-
-	var newDiv = document.createElement("div");
-	newDiv.className = "column";
-	var tbl = document.createElement("table");
-	tbl.className = "tbl";
-	
-	for (i = 0; i < 10; i++){  
-		var left = Math.floor(Math.random() * 10);
-		var righti = Math.floor(Math.random() * (values.length))
-		addCalculation(tbl, left, values[righti]);
-	}
-	newDiv.appendChild(tbl);
-	newDiv.id = "calcs";
-	
-    document.body.insertBefore(newDiv, div);
-}
-
-
-
-
-function myFunction() {
-  //var x = document.getElementById("myTable").rows[0].cells.length;
-  //document.getElementById("demo").innerHTML = "Found " + x + " cells in the first tr element.";
-  
-  //document.getElementById("myTable").rows[1].cells[0].innerHTML = '1 . 2';
-
+function checkcheck(){
   values = [];
   
   if(document.getElementById("one").checked){
@@ -198,26 +161,64 @@ function myFunction() {
   if(document.getElementById("ten").checked){
 	values.push(10);
   }
+  var len = values.length;
+  if (len == 0)
+	document.getElementById("generate").disabled = true;
+  else
+    document.getElementById("generate").disabled = false;
   
-  var el = document.getElementById('calcdiv');
-	if(el != null)
-		el.remove();
-	
+}
 
-  calcdiv = document.createElement("div");
-  calcdiv.id = "calcdiv";
+function addCalculation(tableID, left, right){
+    var table = tableID
+
+	var rowCount = table.rows.length;
+	var row = table.insertRow(rowCount);
+	
+	
+	let calc = left + " . " + right + " =";
+	
+     
+	var cell1 = row.insertCell(0);
+	cell1.innerHTML = calc;
+	
+}
+
+function addCol(calcdiv){
+
+	var newDiv = document.createElement("div");
+	newDiv.className = "column";
+	var tbl = document.createElement("table");
+	tbl.className = "tbl";
+	
+	for (i = 0; i < 10; i++){  
+		var left = Math.floor(Math.random() * 10);
+		var righti = Math.floor(Math.random() * (values.length))
+		addCalculation(tbl, left, values[righti]);
+	}
+	newDiv.appendChild(tbl);
+	newDiv.id = "calcs";
+	
+	calcdiv.appendChild(newDiv);
+}
+
+
+
+
+function myFunction() {
   
-  var currentDiv = document.getElementById("div1");
-  document.body.insertBefore(calcdiv, currentDiv);
   
+  var calcdiv = document.getElementById('calcdiv');
+  calcdiv.innerHTML = "";
 
   for (c = 0; c < 6; c++){
 	addCol(calcdiv);
   }
   
-
   
+  var currentDiv = document.getElementById("div1");
   
+  document.body.insertBefore(calcdiv, currentDiv);
 }
 </script>
 
