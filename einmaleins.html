@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)file:///C:/Users/andre/Work/Software/eins/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* Style the header */
+.header {
+  background-color: #f1f1f1;
+  padding: 20px;
+  text-align: center;
+}
+
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 15px;
+}
+
+
+
+.tbl , th, td{
+  table-layout:fixed;
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin: 5px;
+  width: 100%;
+  font-size: x-large;
+  text-align: center;
+}
+
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Malsätzchen</h1>
+  <p>Erzeugt dir Einmaleins Rechenübungen</p>
+</div>
+
+<div class="topnav">
+	<a>
+		<input type="checkbox" id="one" name="one">
+		<label for="vehicle1"> 1 </label><br>
+	</a>
+	<a>
+		<input type="checkbox" id="two" name="two">
+		<label for="vehicle1"> 2</label><br>
+	</a>
+	<a>
+		<input type="checkbox" id="three" name="three">
+		<label for="vehicle1"> 3</label><br>
+	</a>
+	<a>
+		<input type="checkbox" id="four" name="four">
+		<label for="vehicle1"> 4 </label><br>
+	</a>
+	<a>
+		<input type="checkbox" id="five" name="five">
+		<label for="vehicle1"> 5</label><br>
+	</a>
+	<a>
+		<input type="checkbox" id="six" name="six">
+		<label for="vehicle1"> 6</label><br>
+	</a>
+		<a>
+		<input type="checkbox" id="seven" name="seven">
+		<label for="vehicle1"> 7</label><br>
+	</a>
+	<a>
+		<input type="checkbox" id="eight" name="eight">
+		<label for="vehicle1"> 8 </label><br>
+	</a>
+	<a>
+		<input type="checkbox" id="nine" name="nine">
+		<label for="vehicle1"> 9</label><br>
+	</a>
+	<a>
+		<input type="checkbox" id="ten" name="ten">
+		<label for="vehicle1"> 10</label><br>
+	</a>
+	<a>
+		<button onclick="myFunction()">Try it</button>
+	</a>
+	
+</div>
+
+
+
+
+
+
+
+<p id="demo"></p>
+
+<script>
+
+var values;
+
+function addCalculation(tableID, left, right){
+    var table = tableID
+
+	var rowCount = table.rows.length;
+	var row = table.insertRow(rowCount);
+	
+	
+	let calc = left + " . " + right;
+	
+     
+	var cell1 = row.insertCell(0);
+	cell1.innerHTML = calc;
+	
+	var cell2 = row.insertCell(1);
+}
+
+function addCol(div){
+
+	var newDiv = document.createElement("div");
+	newDiv.className = "column";
+	var tbl = document.createElement("table");
+	tbl.className = "tbl";
+	
+	for (i = 0; i < 10; i++){  
+		var left = Math.floor(Math.random() * 10);
+		var righti = Math.floor(Math.random() * (values.length))
+		addCalculation(tbl, left, values[righti]);
+	}
+	newDiv.appendChild(tbl);
+	newDiv.id = "calcs";
+	
+    document.body.insertBefore(newDiv, div);
+}
+
+
+
+
+function myFunction() {
+  //var x = document.getElementById("myTable").rows[0].cells.length;
+  //document.getElementById("demo").innerHTML = "Found " + x + " cells in the first tr element.";
+  
+  //document.getElementById("myTable").rows[1].cells[0].innerHTML = '1 . 2';
+
+  values = [];
+  
+  if(document.getElementById("one").checked){
+	values.push(1);
+  }
+  if(document.getElementById("two").checked){
+	values.push(2);
+  }
+  if(document.getElementById("three").checked){
+	values.push(3);
+  }
+  if(document.getElementById("four").checked){
+	values.push(4);
+  }
+  if(document.getElementById("five").checked){
+	values.push(5);
+  }
+  if(document.getElementById("six").checked){
+	values.push(6);
+  }
+  if(document.getElementById("seven").checked){
+	values.push(7);
+  }
+  if(document.getElementById("eight").checked){
+	values.push(8);
+  }
+  if(document.getElementById("nine").checked){
+	values.push(9);
+  }
+  if(document.getElementById("ten").checked){
+	values.push(10);
+  }
+  
+  var el = document.getElementById('calcdiv');
+	if(el != null)
+		el.remove();
+	
+
+  calcdiv = document.createElement("div");
+  calcdiv.id = "calcdiv";
+  
+  var currentDiv = document.getElementById("div1");
+  document.body.insertBefore(calcdiv, currentDiv);
+  
+
+  for (c = 0; c < 6; c++){
+	addCol(calcdiv);
+  }
+  
+
+  
+  
+}
+</script>
+
